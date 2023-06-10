@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Image, Modal, ScrollView, StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
+import { Image, ImageStyle, Modal, ScrollView, StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
 import { UserType } from "../../consts/types";
 import Illu from '../../assets/images/illu.png'
 import Close from '../../assets/images/close.png'
@@ -8,6 +8,7 @@ import Female from '../../assets/images/female.png'
 import Phone from '../../assets/images/phone.png'
 import Email from '../../assets/images/mail.png'
 import { Avatar } from "react-native-elements";
+import MapView, { Marker } from 'react-native-maps';
 
 const styles = StyleSheet.create({
   image: {
@@ -20,6 +21,7 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   container: {
     paddingHorizontal: 30,
+    backgroundColor: '#fff'
   } as ViewStyle,
   headerText: {
     color: '#8F5F15',
@@ -58,6 +60,18 @@ const styles = StyleSheet.create({
     padding: 10,
     gap: 17,
   } as ViewStyle,
+  shadow: {
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 1,
+    shadowRadius: 6,
+    elevation: 6,
+    backgroundColor: "white" ,
+    borderRadius: 25,
+    overflow: 'hidden',
+    height: 50,
+    width: 50,
+  } as ViewStyle,
 })
 
 interface Props {
@@ -68,7 +82,7 @@ interface Props {
 
 const UserInfoScreen:React.FC<Props> = ({isOpen, onClose, user}) => {
 
-  console.log('user in modal', user);
+  console.log('user in modal', user.location);
   const pic = user.picture
   return (
     <Modal
@@ -85,11 +99,13 @@ const UserInfoScreen:React.FC<Props> = ({isOpen, onClose, user}) => {
           <Text style={styles.headerText}>My Profile</Text>
           <View>
             <Text style={[styles.subheaderText, {marginBottom: 13}]}>Profile Picture</Text>
-            <Avatar
-              rounded
-              source={{ uri: user.picture }}
-              size="large"
-            />
+            <View style={styles.shadow}>
+              <Avatar
+                rounded
+                source={{ uri: user.picture }}
+                size="large"
+              />
+            </View>
           </View>
           <View>
             <Text style={styles.subheaderText}>First Name</Text>
@@ -138,7 +154,23 @@ const UserInfoScreen:React.FC<Props> = ({isOpen, onClose, user}) => {
               </View>
             </View>
           </View>
-          <Text style={styles.subheaderText}>Location</Text>
+          <View>
+            <Text style={styles.subheaderText}>Location</Text>
+            {/*<View style={styles.container}>*/}
+            {/*  {user.location && (*/}
+            {/*    <MapView initialRegion={{*/}
+            {/*      latitude: user.location.coordinates.latitude,*/}
+            {/*      longitude: user.location.coordinates.longitude,*/}
+            {/*      latitudeDelta: 0.02,*/}
+            {/*      longitudeDelta: 0.02, }}>*/}
+            {/*      <Marker coordinate={{*/}
+            {/*        latitude: user.location.coordinates.latitude,*/}
+            {/*        longitude: user.location.coordinates.longitude,*/}
+            {/*      }} />*/}
+            {/*    </MapView>*/}
+            {/*  )}*/}
+            {/*</View>*/}
+          </View>
         </View>
       </ScrollView>
     </Modal>
