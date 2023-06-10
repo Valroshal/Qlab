@@ -1,14 +1,24 @@
 import * as React from 'react'
-import { Image, ImageStyle, Modal, ScrollView, StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
-import { UserType } from "../../consts/types";
+import {
+  Image,
+  Modal,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle
+} from "react-native"
+import { TypeUser } from "../../consts/types"
 import Illu from '../../assets/images/illu.png'
 import Close from '../../assets/images/close.png'
 import Male from '../../assets/images/male.png'
 import Female from '../../assets/images/female.png'
 import Phone from '../../assets/images/phone.png'
 import Email from '../../assets/images/mail.png'
-import { Avatar } from "react-native-elements";
-import MapView, { Marker } from 'react-native-maps';
+import { Avatar } from "react-native-elements"
+import MapView, { Marker } from 'react-native-maps'
 
 const styles = StyleSheet.create({
   image: {
@@ -29,6 +39,7 @@ const styles = StyleSheet.create({
     marginBottom: 21,
     fontSize: 32,
     fontWeight: '700',
+    fontFamily: 'Comfortaa-Regular',
   } as TextStyle,
   subheaderText: {
     fontSize: 16,
@@ -36,6 +47,12 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 8,
     color: '#000',
+    fontFamily: 'Montserrat-Regular'
+  } as TextStyle,
+  infoText: {
+    color: '#000',
+    fontFamily: 'Montserrat-Regular',
+    fontSize: 14,
   } as TextStyle,
   gender: {
     display: 'flex',
@@ -66,7 +83,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 6,
     elevation: 6,
-    backgroundColor: "white" ,
+    backgroundColor: "#fff" ,
     borderRadius: 25,
     overflow: 'hidden',
     height: 50,
@@ -77,13 +94,11 @@ const styles = StyleSheet.create({
 interface Props {
   isOpen: boolean
   onClose: () => void
-  user: UserType
+  user: TypeUser
 }
 
 const UserInfoScreen:React.FC<Props> = ({isOpen, onClose, user}) => {
 
-  console.log('user in modal', user.location);
-  const pic = user.picture
   return (
     <Modal
       animationType="slide"
@@ -91,7 +106,9 @@ const UserInfoScreen:React.FC<Props> = ({isOpen, onClose, user}) => {
       visible={isOpen}
     >
       <ScrollView style={{marginBottom: 80}}>
-        <Image source={Close} />
+        <TouchableOpacity onPress={onClose} style={{backgroundColor: '#FBF1DF'}}>
+          <Image source={Close} />
+        </TouchableOpacity>
         <View style={styles.image}>
           <Image source={Illu} />
         </View>
@@ -110,27 +127,27 @@ const UserInfoScreen:React.FC<Props> = ({isOpen, onClose, user}) => {
           <View>
             <Text style={styles.subheaderText}>First Name</Text>
             <View style={styles.detailSubcontainer}>
-              <Text style={{color: '#000'}}>{user.firstName}</Text>
+              <Text style={styles.infoText}>{user.firstName}</Text>
             </View>
           </View>
           <View>
             <Text style={styles.subheaderText}>Last Name</Text>
             <View style={styles.detailSubcontainer}>
-              <Text style={{color: '#000'}}>{user.lastName}</Text>
+              <Text style={styles.infoText}>{user.lastName}</Text>
             </View>
           </View>
           <View>
             <Text style={styles.subheaderText}>Email</Text>
             <View style={styles.detailSubcontainer}>
               <Image source={Email} />
-              <Text style={{color: '#000'}}>{user.email}</Text>
+              <Text style={styles.infoText}>{user.email}</Text>
             </View>
           </View>
           <View>
             <Text style={styles.subheaderText}>Phone</Text>
             <View style={styles.detailSubcontainer}>
               <Image source={Phone} />
-              <Text style={{color: '#000'}}>{user.phone}</Text>
+              <Text style={styles.infoText}>{user.phone}</Text>
             </View>
           </View>
           <View>

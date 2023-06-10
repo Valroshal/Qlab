@@ -1,10 +1,20 @@
-export interface UserType {
+export interface TypeUser {
   firstName: string
   lastName: string
   gender: string
   email: string
   phone: string
   uuid: string
-  location: any
-  picture: any //TODO
+  location: TypeLocation
+  picture: string
+}
+
+interface TypeLocation {
+  city: string
+  coordinates: {}
+  country: string
+  postcode: number
+  state: string
+  street: {}
+  timezone: {}
 }

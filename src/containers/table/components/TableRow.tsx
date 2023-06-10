@@ -1,15 +1,15 @@
-import { Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View, ViewStyle } from "react-native";
-import { UserType } from "../../../consts/types";
-import React, { useRef, useState } from "react";
-import UserInfoScreen from "../../userInfo/UserInfoScreen";
-import RowEdit from "./RowEdit";
+import { Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View, ViewStyle } from "react-native"
+import { TypeUser } from "../../../consts/types"
+import React, { useRef, useState } from "react"
+import UserInfoScreen from "../../userInfo/UserInfoScreen"
+import RowEdit from "./RowEdit"
 import Woman from '../../../assets/images/woman.png'
 import Man from '../../../assets/images/man.png'
 
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#000',
     padding: 10,
     margin: 10
   } as ViewStyle,
@@ -18,11 +18,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 5
   } as ViewStyle,
+  genderContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingVertical: 5,
+    alignItems: 'center'
+  } as ViewStyle,
+
 })
 
 interface Props {
-  user: UserType
-  onUpdateUser: (updatedUser: UserType) => void
+  user: TypeUser
+  onUpdateUser: (updatedUser: TypeUser) => void
   onDeleteUser: (id: string) => void
 
 }
@@ -37,7 +44,7 @@ const TableRow:React.FC<Props> = ({user, onUpdateUser, onDeleteUser}) => {
     onDeleteUser(user.uuid)
   }
   const handleUpdatePress = () => {
-    const updatedUser: UserType = {
+    const updatedUser: TypeUser = {
       ...user,
       firstName,
       lastName,
@@ -86,7 +93,7 @@ const TableRow:React.FC<Props> = ({user, onUpdateUser, onDeleteUser}) => {
         onSetValue={(e: string) => setLastName(e)}
       />
 
-      <View style={{display: 'flex', flexDirection: 'row', paddingVertical: 5, alignItems: 'center'}}>
+      <View style={styles.genderContainer}>
         <Text>Gender</Text>
         <Image source={ user.gender === 'female' ? Woman: Man} style={{width: 30, height: 30}} />
       </View>

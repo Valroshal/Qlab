@@ -11,7 +11,7 @@ import StackNavigator from './src/navigation/StackNavigator'
 import { SafeAreaProvider } from "react-native-safe-area-context"
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = useColorScheme() === 'dark'
 
   return (
     <SafeAreaProvider style={{backgroundColor: '#fff'}}>

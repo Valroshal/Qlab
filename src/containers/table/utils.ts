@@ -1,11 +1,11 @@
-import { UserType } from "../../consts/types";
+import { TypeUser } from "../../consts/types";
 
-export const fetchUsersData = async (): Promise<UserType[]> => {
-  let userData: UserType[] = [];
+export const fetchUsersData = async (): Promise<TypeUser[]> => {
+  let userData: TypeUser[] = []
 
-  for (let i = 0; i < 3; i++) {
-    const response = await fetch('https://randomuser.me/api/?results=15');
-    const data = await response.json();
+  for (let i = 0; i < 4; i++) {
+    const response = await fetch('https://randomuser.me/api/?results=15')
+    const data = await response.json()
 
     const usersData = data.results.map((result: any) => {
       return {
@@ -17,11 +17,11 @@ export const fetchUsersData = async (): Promise<UserType[]> => {
         uuid: result.login.uuid,
         location: result.location,
         picture: `${result.picture.thumbnail}`
-      } as UserType;
+      } as TypeUser;
     });
 
-    userData = userData.concat(usersData);
+    userData = userData.concat(usersData)
   }
 
-  return userData;
+  return userData
 };
