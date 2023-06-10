@@ -1,14 +1,19 @@
-import { View, Text, Button, StyleSheet, ScrollView, ViewStyle } from "react-native";
+import { View, Text, Button, StyleSheet, ScrollView, ViewStyle, Image } from "react-native";
 import React, { useEffect, useMemo, useState } from "react";
 import SelectDropdown from 'react-native-select-dropdown'
 import { fetchUsersData } from "./utils";
 import { UserType } from "../../consts/types";
 import TableRow from "./components/TableRow";
+import ArrowUp from '../../assets/images/arrow-up.png'
+import ArrowDown from '../../assets/images/arrow-down.png'
 
 const styles = StyleSheet.create({
   buttonContainer: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    marginTop: 10
   } as ViewStyle,
 })
 
@@ -82,23 +87,27 @@ const TableWrapper = () => {
   };
 
   return(
-    <View style={{paddingBottom: 20}}>
-      <Text>Users per page: {usersPerPage}</Text>
-      <SelectDropdown
-        data={pages}
-        onSelect={(selectedItem, index) => {
-          console.log(selectedItem, index)
-          handleUsersPerPageChange(selectedItem)
-        }}
-        buttonTextAfterSelection={(selectedItem, index) => {
-          return selectedItem
-        }}
-        rowTextForSelection={(item, index) => {
-          return item
-        }}
-        defaultValue={usersPerPage}
-      />
-      <ScrollView style={{marginBottom: 50}}>
+    <View style={{paddingVertical: 20, display: 'flex', alignItems: 'center'}}>
+      <Text style={{fontSize: 16}}>Users per page: {usersPerPage}</Text>
+        <SelectDropdown
+          buttonStyle={{borderWidth: 1, borderColor: 'black'}}
+          data={pages}
+          onSelect={(selectedItem, index) => {
+            console.log(selectedItem, index)
+            handleUsersPerPageChange(selectedItem)
+          }}
+          buttonTextAfterSelection={(selectedItem, index) => {
+            return selectedItem
+          }}
+          rowTextForSelection={(item, index) => {
+            return item
+          }}
+          defaultValue={usersPerPage}
+          renderDropdownIcon={(isOpened) => (
+            <Image source={isOpened? ArrowUp: ArrowDown} />
+          )}
+        />
+      <ScrollView style={{marginBottom: 80}}>
         {displayedUsers.map((user:UserType, index) => (
           <TableRow
             key={user.uuid}
@@ -108,11 +117,14 @@ const TableWrapper = () => {
           />
         ))}
         <View style={styles.buttonContainer}>
-          <Button title="Previous" onPress={handlePreviousPage} />
-          <Button title="Next" onPress={handleNextPage} />
+          <View style={{width: 90}}>
+            <Button title="Previous" onPress={handlePreviousPage} />
+          </View>
+          <View style={{width: 90}}>
+            <Button title="Next" onPress={handleNextPage} />
+          </View>
         </View>
       </ScrollView>
-
     </View>
   )
 }

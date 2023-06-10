@@ -15,7 +15,8 @@ export const fetchUsersData = async (): Promise<UserType[]> => {
         email: result.email,
         phone: result.phone,
         uuid: result.login.uuid,
-        location: result.location
+        location: result.location,
+        picture: `${result.picture.thumbnail}`
       } as UserType;
     });
 

@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import UserInfoScreen from "../../userInfo/UserInfoScreen";
 import RowEdit from "./RowEdit";
 import Woman from '../../../assets/images/woman.png'
+import Man from '../../../assets/images/man.png'
 
 const styles = StyleSheet.create({
   container: {
@@ -15,6 +16,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     display: 'flex',
     flexDirection: 'row',
+    gap: 5
   } as ViewStyle,
 })
 
@@ -84,9 +86,9 @@ const TableRow:React.FC<Props> = ({user, onUpdateUser, onDeleteUser}) => {
         onSetValue={(e: string) => setLastName(e)}
       />
 
-      <View>
+      <View style={{display: 'flex', flexDirection: 'row', paddingVertical: 5, alignItems: 'center'}}>
         <Text>Gender</Text>
-        <Image source={}
+        <Image source={ user.gender === 'female' ? Woman: Man} style={{width: 30, height: 30}} />
       </View>
 
       <View style={styles.buttonContainer}>
@@ -96,6 +98,7 @@ const TableRow:React.FC<Props> = ({user, onUpdateUser, onDeleteUser}) => {
       <UserInfoScreen
         isOpen={modalVisible}
         onClose={() => setModalVisible(false)}
+        user={user}
       ></UserInfoScreen>
     </View>
   )

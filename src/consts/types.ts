@@ -6,4 +6,5 @@ export interface UserType {
   phone: string
   uuid: string
   location: any
+  picture: any //TODO
 }
