@@ -9,7 +9,6 @@ const StackNavigator = () => {
   return(
     <Stack.Navigator initialRouteName={'TableWrapper'}>
       <Stack.Screen name='TableWrapper' component={TableWrapper} options={{ headerShown: false }}/>
-      {/*<Stack.Screen name='ListWrapper' component={ListWrapper} options={{ headerShown: false }}/>*/}
     </Stack.Navigator>
   )
 }
